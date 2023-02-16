@@ -110,7 +110,7 @@ In SQL, integer data types are signed by default, meaning that they can represen
 However, you can specify that a particular integer data type should only contain non-negative values (i.e., be unsigned) by adding the keyword UNSIGNED after the data type. For example, INT UNSIGNED would create an integer column that can only store non-negative values.
 
 It's worth noting that using an unsigned integer can effectively double the maximum value that can be stored in that column, since you're not using one bit to represent the sign of the value.
-###### Why not just useall the time?
+###### Why not use BIGINT all the time?
 Using a smaller integer type can indeed increase processing speed and require less storage space per data point. However, it is important to choose the appropriate data type for the specific needs of the database.
 
 For example, if the range of values for a column is likely to exceed the maximum value of a TINYINT data type, using that data type could result in errors or data loss. On the other hand, if a larger data type like BIGINT is used when it is not needed, it can result in wasted storage space and slower processing times.
