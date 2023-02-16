@@ -123,6 +123,59 @@ Floating point data types, on the other hand, represent approximate numeric valu
 
 The choice between fixed and floating point data types depends on the specific requirements of your application. If you need to store exact values, then fixed point data types are the way to go. If you need to store very large or very small numbers, or if you need to perform complex mathematical calculations, then floating point data types are the better choice.
 
+THe main difference between the fixed and the floating point type is in the way the value is represented in the memory of the computer.Fixed point numbers are represented as a set number of bits for the whole number part and a set number of bits for the fractional part, with the decimal point fixed in place. Floating point numbers, on the other hand, use a scientific notation-like representation, where the number is expressed as a mantissa (or significand) and an exponent. This allows for a wider range of values to be represented, but at the cost of some precision.
+### Other Useful Data Types
+DATETIME: represents the date shown on the calendar and the time shown on the clock. The DATETIME data type in SQL is used to represent a specific point in time, including both a date and a time. It is typically used for recording and manipulating temporal data in a database.
+
+The format of the DATETIME value is 'YYYY-MM-DD HH:MM:SS', where YYYY is the four-digit year, MM is the two-digit month, DD is the two-digit day, HH is the two-digit hour, MM is the two-digit minute, and SS is the two-digit second.
+
+The range of values that can be stored in a DATETIME data type depends on the specific implementation of SQL. In some systems, the range may be limited to the years 1901 through 2099, while in others it may extend to earlier or later dates.
+TIMESTAMP: The TIMESTAMP data type in SQL represents a specific point in time, typically including both a date and time component. It is often used to store information about when a record was last updated or when a certain event occurred.
+Representing a moment in time as a number (such as the Unix timestamp) allows for easy comparison and calculation of the difference between two timestamps. For example, if you have two timestamps representing the start and end of an event, you can easily calculate the duration of the event by subtracting the start timestamp from the end timestamp.
+
+One of the advantages of using TIMESTAMP is that it automatically updates itself to the current date and time whenever a row is inserted or updated. This can be useful for tracking changes to a database over time, and for ensuring that records are kept up-to-date.
+
+However, it's worth noting that the precise behavior of TIMESTAMP can vary depending on the database management system you are using, so it's important to consult the documentation for your particular system to ensure that you are using the data type correctly.
+### BLOB: Binary Large OB ject
+-refers to a file of binary data data with 1s and 0s
+- involves saving files in a record
+- BLOB (Binary Large Object) is a data type that allows you to store large binary data in a database table, such as image files, audio files, or video files. 
+- It can be used to save any kind of binary data, including executable programs or compressed archives.
+- BLOBs are commonly used to store files in a database as a way of keeping related data together in one place, rather than in separate files on a file system. 
+- This can make it easier to manage and back up the data, and can also help with data consistency and integrity.
+- BLOBs can be a useful data type for certain types of applications, but they can also make databases much larger and slower to search than they need to be.
+-  In general, it is recommended to use BLOBs sparingly and only when they are really necessary, and to use other types of data for storing text and other smaller data.
+## Creating A table
+To create a table in SQL, you can use the CREATE TABLE statement followed by the table name and a set of parentheses that list the columns and their data types. Here's an example:
+```sql
+CREATE TABLE customers (
+  id INT,
+  first_name VARCHAR(50),
+  last_name VARCHAR(50),
+  email VARCHAR(100)
+);
+```
+This creates a table called customers with four columns: id, first_name, last_name, and email. The id column has a data type of INT, which stands for integer. The first_name, last_name, and email columns are all of data type VARCHAR, which stands for variable-length character string, and they have different maximum lengths specified in parentheses.
+Note that, When creating a table in SQL, you must add at least one column to define the structure of the table. Here's an example of creating a table called "customers" with three columns: "customer_id", "customer_name", and "customer_email":
+```sql
+CREATE TABLE customers (
+    customer_id INT,
+    customer_name VARCHAR(50),
+    customer_email VARCHAR(100)
+);
+```
+#### AUTO_INCREMENT
+-frees you from having to insert all purchase numbers manually through the INSERT command at a later stage
+-assigns 1 to the first record of the table and automatically increments by 1 for every subsequent row
+AUTO_INCREMENT is a feature in SQL that is commonly used for generating a unique and sequential ID number for a primary key column in a table. It is often used for tables where new records are frequently added, such as transactional tables, to ensure that each record has a unique identifier.
+
+When a column is defined as AUTO_INCREMENT, it is automatically assigned the next available number starting from 1, and increments by 1 for each new row added to the table. This helps to ensure that each record has a unique identifier, and also makes it easy to reference a specific record in a table by its ID number.
+
+AUTO_INCREMENT is often used in combination with the PRIMARY KEY constraint, which ensures that the ID number column is unique and not null. This helps to ensure that each record in the table has a unique identifier, which is useful for querying and updating the data in the table.
+## Using Databases and Tables
+### Queries
+Queries are used to retrieve, manipulate, and analyze data stored in a database. SQL, the language used to manage databases, provides a variety of commands for working with data, such as SELECT, INSERT, UPDATE, and DELETE. These commands allow you to retrieve specific data based on certain conditions, insert new data into tables, update existing data, or delete data from tables. By using these commands, you can create complex queries to retrieve the information you need from a database.
+
 ### SELECT * FROM orders;
 This statement is composed of clauses. Clauses always appear in the same order. Some clauses are required and others are optional. The SELECT clause tells the database which columns you want to read from the database. The * is called a wildcard. There are various types of wildcards. This one represents “all columns.” The FROM clause tells the database which table to you want to select columns from. Both SELECT and FROM are mandatory clauses in any SELECT statement. You can write statements in lower case, but traditionally, SQL commands are written all uppercase. So, “select * from orders;” works just fine, but “SELECT * FROM orders;” is more conventional. Sometimes you’ll be required to end a statement in a semicolon, but it depends on the environment. It’s a good habit to include the semicolon at the end.
 
@@ -143,11 +196,25 @@ FROM orders
 ORDER BY occurred_at DESC
 LIMIT 10
 ```
+```sql
+-- This query selects the first 10 rows from the orders table
+SELECT * FROM orders
+LIMIT 10;
+```
+The double hyphens indicate a single-line comment, which is ignored by the SQL engine when it executes the code. The comment is simply there to provide a human-readable explanation of what the code does.
+
+The SELECT statement in this code selects all columns from the orders table. The * symbol is a shorthand way of saying "select all columns". The FROM clause specifies the table from which the data is selected.
+
+The LIMIT clause is used to restrict the number of rows that are returned by the query. In this case, the LIMIT clause is set to 10, so the query will return the first 10 rows from the orders table. This is useful when working with large datasets, as it allows you to preview a small subset of the data before running more complex queries or processing the entire dataset.
+
 Just like in Excel, you can order by multiple columns. Just list the columns you want to use as a comma separated list. For example:
 ```sql
+-- This query selects all columns from the "orders" table
 SELECT *
+-- Orders the results in descending order by the "occurred_at" column
 FROM orders
-ORDER BY occurred_at DESC, total_amt_usd
+ORDER BY occurred_at DESC
+-- Limits the number of results to 10
 LIMIT 10
 ```
 Notice that we specified that “occurred_at” should be descending order, but total_amt_usd should be in the default ascending order.
@@ -241,4 +308,25 @@ SELECT *
 FROM orders
 WHERE standard_qty = 0 OR gloss_qty = 0 OR poster_qty = 0
 ```
-Here, we are selecting all columns from the “orders” table, but only where the “standard_qty” is 0, or where the “gloss_qty” is 0, or where the “poster_qty” is 0. 
+Here, we are selecting all columns from the “orders” table, but only where the “standard_qty” is 0, or where the “gloss_qty” is 0, or where the “poster_qty” is 0.
+### .––“dot operator"
+
+The "dot operator" is also known as the period or full stop symbol "." in SQL. It is used to indicate the existence of a relationship or connection between two object types, usually between tables and their respective columns.
+
+In a query, the dot operator is used to reference a column in a specific table. For example, if you have two tables named "orders" and "customers" that are related by a "customer_id" column, you could use the dot operator to join the two tables on that column like this:
+```sql
+SELECT * FROM sales.customers;
+```
+
+This SQL query selects all columns from the "customers" table in the "sales" database. The asterisk indicates that all columns should be included in the results. The "sales.customers" notation specifies the table name and its location within the "sales" database. This query would return all of the rows and columns in the "customers" table.
+
+In this example, the dot operator is used to specify the column names and their associated tables in the SELECT statement. It is also used to specify the column used in the join condition between the two tables.
+
+
+
+
+
+
+
+
+
