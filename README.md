@@ -322,10 +322,48 @@ This SQL query selects all columns from the "customers" table in the "sales" dat
 
 In this example, the dot operator is used to specify the column names and their associated tables in the SELECT statement. It is also used to specify the column used in the join condition between the two tables.
 
+## Introduction to Joins
+The whole purpose of JOIN statements is to allow us to pull data from more than one table at a time.
+Again - JOINs are useful for allowing us to pull data from multiple tables. This is both simple and powerful all at the same time.
+With the addition of the JOIN statement to our toolkit, we will also be adding the ON statement.
+We use ON clause to specify a JOIN condition which is a logical statement to combine the table in FROM and JOIN statements.
 
+The ON statement is used to specify the condition for the JOIN to be executed. The JOIN statement is used to combine rows from two or more tables based on a related column between them. The ON statement is where you specify the column(s) on which to join the tables.
 
+For example, consider two tables: customers and orders. The customers table has columns customer_id, name, and email, while the orders table has columns order_id, customer_id, product_name, and price. If you want to retrieve data from both tables, you can use a JOIN statement with the ON condition specifying that the customer_id column in the customers table matches the customer_id column in the orders table:
+```sql
+SELECT *
+FROM customers
+JOIN orders ON customers.customer_id = orders.customer_id;
+```
+This query will return a result set with all the columns from both tables where the customer_id column matches between the two tables.
+Let's say you have two tables in your database, a "customers" table and an "orders" table. The customers table contains information about your customers, such as their name and address, while the orders table contains information about each order they have made, such as the order date and the total cost.
 
+If you want to know which orders were made by a particular customer, you would need to join these two tables together. You can do this using a JOIN statement, like so:
+```sql
+SELECT *
+FROM customers
+JOIN orders ON customers.customer_id = orders.customer_id
+WHERE customers.name = 'John Smith';
+```
+In this example, we are selecting all columns from both the customers and orders tables where the customer name is "John Smith". The JOIN statement is used to combine the two tables, with the ON statement specifying the condition for the join. In this case, we are joining the tables on the customer_id column, which is present in both tables.
+Using JOIN statements allows you to combine data from multiple tables into a single result set, enabling you to answer more complex questions about your data.
+### other examples 
+```sql
+SELECT orders.*,
+       accounts.*
+FROM orders 
+JOIN accounts
+ON orders.account_id = accounts.id;
+```
+This SQL statement is an example of a JOIN query that combines data from two tables: "orders" and "accounts".
 
+The SELECT statement is used to specify the columns we want to retrieve data from. In this case, we are using the wildcard character "*" to indicate that we want to retrieve all columns from both tables.
+
+The JOIN statement is used to combine data from the "orders" and "accounts" tables. We are using the INNER JOIN clause, which will only return rows where there is a match in both tables based on the ON condition.
+
+The ON statement specifies the condition for the join operation, which in this case is that the "account_id" column in the "orders" table matches the "id" column in the "accounts" table.
+By combining the data from these two tables in the query results, we can gain insights into relationships between the data and better understand the data as a whole.
 
 
 
