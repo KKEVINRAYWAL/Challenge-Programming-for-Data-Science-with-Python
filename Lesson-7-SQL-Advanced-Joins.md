@@ -13,7 +13,7 @@ FROM Table_A
 INNER JOIN Table_B ON Table_A.column_name = Table_B.column_name;
 ```
 
-![Inner Join](/assets/inner-join.png)
+
 
 #### Left Join General Form
 
@@ -24,8 +24,6 @@ FROM Table_A
 LEFT JOIN Table_B ON Table_A.column_name = Table_B.column_name;
 ```
 
-![Left Join](/assets/left-join.png)
-
 #### Right Join General Form
 
 When you want to include unmatched records from the right table.
@@ -35,7 +33,7 @@ FROM Table_A
 RIGHT JOIN Table_B ON Table_A.column_name = Table_B.column_name;
 ```
 
-![Right Join](/assets/right-join.png)
+
 
 #### Full Outer Join
 
@@ -46,7 +44,6 @@ FROM Table_A
 FULL OUTER JOIN Table_B ON Table_A.column_name = Table_B.column_name;
 ```
 
-![Full Outer](/assets/full-outer-join.png)
 
 FULL JOIN is commonly used in conjunction with aggregations to understand the amount of overlap between two tables.
 
@@ -60,7 +57,6 @@ FULL OUTER JOIN Table_B ON Table_A.column_name = Table_B.column_name;
 WHERE Table_A.column_name IS NULL OR Table_B.column_name IS NULL
 ```
 
-![Full outer join with nulls only](/assets/full-outer-join-if-null.png)
 
 #### Problems for Full Outer Join
 
@@ -380,7 +376,7 @@ AND    occurred_at < '2016-02-01'
 LIMIT 100
 ```
 
-![Query Plan Example](/assets/query-plan-example.png)
+
 
 #### Tip 4: Aggregate over subqueries that you then join
 
